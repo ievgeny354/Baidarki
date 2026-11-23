@@ -9,20 +9,19 @@ public class Main {
         System.out.print("Введите ограничение по весу: ");
         int limit = scan.nextInt();
         int[] arr = new int[n]; //кол-во чел-к в группе
-        int qty=0;
+        int qty = 0;
         inputWeight(arr, limit);     //ввод весов группы, с ограничением по весу
         System.out.println("Группа из " + n + " человек с весами: " + Arrays.toString(arr));
-        countBaidarki(arr, qty, limit);
-        System.out.println("Требуется " + qty + " лодок");
+        countBaidarki(arr, limit);
+        //System.out.println("Требуется " + qty + " лодок");
     }
 
-    private static int countBaidarki(int[] arr, int qty, int limit) {
-        int i = 1;                       //текущий элемент
-        int qty2=0;
+    private static void countBaidarki(int[] arr, int limit) {
+        int i = 0;                       //текущий элемент
+        int qty2 = 0;
 
-        while (i < arr.length)
-        {
-            if (arr[i-1] + arr[arr.length - i] <= limit) {
+        while (i < arr.length) {
+            if (arr[i] + arr[arr.length - i] <= limit) {
                 qty2++;
                 i++;
                 i++;
@@ -31,7 +30,8 @@ public class Main {
                 i++;
             }
         }
-        return qty2;
+        //return qty2;
+        System.out.println("Требуется " + qty2 + " байдарки");
     }
 
     //private static void inputWeight(int[] arr) {    }
