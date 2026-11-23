@@ -12,16 +12,16 @@ public class Main {
         int qty = 0;
         inputWeight(arr, limit);     //ввод весов группы, с ограничением по весу
         System.out.println("Группа из " + n + " человек с весами: " + Arrays.toString(arr));
-        countBaidarki(arr, limit);
-        //System.out.println("Требуется " + qty + " лодок");
+        //countBaidarki(arr, limit);
+        System.out.println("Требуется " + countBaidarki(arr, qty, limit) + " лодок");
     }
 
-    private static void countBaidarki(int[] arr, int limit) {
+    private static int countBaidarki(int[] arr, int qty, int limit) {
         int i = 0;                       //текущий элемент
         int qty2 = 0;
 
-        while (i < arr.length) {
-            if (arr[i] + arr[arr.length - i] <= limit) {
+        while (i <= arr.length) {
+            if ((arr[i] + arr[arr.length-1]) <= limit) {
                 qty2++;
                 i++;
                 i++;
@@ -30,18 +30,19 @@ public class Main {
                 i++;
             }
         }
-        //return qty2;
-        System.out.println("Требуется " + qty2 + " байдарки");
+        return qty2;
+        //System.out.println("Требуется " + qty2 + " байдарки");
     }
 
     //private static void inputWeight(int[] arr) {    }
 
-    public static int[] inputWeight(int[] arr, int limit) {
+    public static void inputWeight(int[] arr, int limit) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите массу каждого чел-ка: ");
         //int arr = new int[n];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = scan.nextInt();
+            System.out.println("Количество участников:"+i);
             if (arr[i] > limit) {
                 System.out.println("Превышение ограничения по весу");
                 System.out.println("замените участника похода");
@@ -49,7 +50,8 @@ public class Main {
             }
         }
         Arrays.sort(arr);
-        return arr;
+        countBaidarki(arr, limit);
+        //return arr;
     }
 }
 
